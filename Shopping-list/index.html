@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shopping List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <style>
+        .highlight {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
@@ -18,14 +23,13 @@
         </div>
         <div class="form-group row">
             <div class="col-md-1">
-                <input type="text" class="form-control" v-model.number="Qty" value="0">
+                <input type="number" min="0" class="form-control" v-model.number="Qty">
             </div>
         </div>
         <div class="form-group row">
             <button class="btn btn-primary" type="submit" 
                 v-on:click="AddItem"
-                v-bind:disabled="Qty < 1"
-            >Submit</button>
+                v-bind:disabled="isDisabled()">Submit</button> 
             <button class="btn btn-danger">Clear</button> 
         </div>
         <ul>
@@ -44,15 +48,26 @@
 
     new Vue({
         el: '#app',
-        grocery: '',
-        Qty: 0,
         data: {
             items: [],
-            message: ''
+            message: '',
+            grocery: '',
+            Qty: 0,
+            isRed: true
         },
         methods: {
             AddItem: function () {
-                this.items.push(this.grocery)
+                this.items.push(this.Qty + ' ' +  this.grocery)
+            },
+            isDisabled: function () {
+                if (this.grocery.length == 0){
+                    return true
+                }
+                if (this.Qty == 0){
+                    return true
+                }
+                else
+                    return false
             }
         },
     });
