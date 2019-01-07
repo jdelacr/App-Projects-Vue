@@ -40,28 +40,44 @@
         <div id="display">{{display}}</div>
         <div id="keyboards">
             <div class="row">
-                <button class="btn btn-primary">7</button>
-                <button class="btn btn-primary">8</button>
-                <button class="btn btn-primary">9</button>
-                <button class="btn btn-info">-</button>
+                <button class="btn btn-primary"
+                @click="handle('7')">7</button>
+                <button class="btn btn-primary"
+                @click="handle('8')">8</button>
+                <button class="btn btn-primary"
+                @click="handle('9')">9</button>
+                <button class="btn btn-info"
+                @click="handle('-')">-</button>
             </div>
             <div class="row">
-                <button class="btn btn-primary">4</button>
-                <button class="btn btn-primary">5</button>
-                <button class="btn btn-primary">6</button>
-                <button class="btn btn-info">/</button>
+                <button class="btn btn-primary"
+                @click="handle('4')">4</button>
+                <button class="btn btn-primary"
+                @click="handle('5')">5</button>
+                <button class="btn btn-primary"
+                @click="handle('6')">6</button>
+                <button class="btn btn-info"
+                @click="handle('/')">/</button>
             </div>
             <div class="row">
-                <button class="btn btn-primary">1</button>
-                <button class="btn btn-primary">2</button>
-                <button class="btn btn-primary">3</button>
-                <button class="btn btn-info">*</button>
+                <button class="btn btn-primary" 
+                @click="handle('1')">1</button>
+                <button class="btn btn-primary"
+                @click="handle('2')">2</button>
+                <button class="btn btn-primary"
+                @click="handle('3')">3</button>
+                <button class="btn btn-info"
+                @click="handle('*')">*</button>
             </div>
             <div class="row">
-                <button class="btn btn-secondary">.</button>
-                <button class="btn btn-primary">0</button>
-                <button class="btn btn-info">=</button>
-                <button class="btn btn-info">+</button>
+                <button class="btn btn-secondary"
+                @click="handle('.')">.</button>
+                <button class="btn btn-primary"
+                @click="handle('0')">0</button>
+                <button class="btn btn-info"
+                @click="eval()">=</button>
+                <button class="btn btn-info"
+                @click="handle('+')">+</button>
             </div>
         </div>
     </div>
@@ -70,8 +86,20 @@
     new Vue({
         el: '#app',
         data: {
-            display : '',
-        }
+            display : '0',
+        },
+        methods: {
+            handle: function(number) {
+                if(this.display[0] === '0'){
+                    return this.display = number;
+                }
+                else
+                    return this.display += number;
+            },
+            eval: function() {
+                return this.display = eval(this.display);
+            }
+        },
     })
     </script>
 </body>
