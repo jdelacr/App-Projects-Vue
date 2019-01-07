@@ -6,3 +6,5 @@ This is repository contains personal projects for learning Vue
 
 ## Calculator
 - Start date: 1/5/19
+- Added button functions
+- Able to calculate
