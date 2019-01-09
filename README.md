@@ -9,3 +9,6 @@ This is repository contains personal projects for learning Vue
 - Added button functions
 - Able to calculate
 - Added clear button and sources
+
+## Online Store Imitation
+- Start date: 1/9/13
