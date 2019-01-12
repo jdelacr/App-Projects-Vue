@@ -48,7 +48,14 @@
         </nav>
 
         <div>
-
+            <ul>
+              <phone-list
+                v-for='list in phones'
+                v-bind:item='list'
+                v-bind:key='list.id'
+              ></phone-list>  
+            </ul>
+            
         </div>
     </div>
 
@@ -59,8 +66,32 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <script>
+    Vue.component('phone-list', {
+            props: ['item'],
+            template: '<li>{{item.name}}</li>'
+        });
+    
     new Vue({
-        
+        el: '#app',
+        data: {
+            phones: [
+                {
+                    id: 0,
+                    name: 'Samsung Galaxy S II',
+                    link: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Samsung_Galaxy_S_II.png'
+                },
+                {
+                    id: 1,
+                    name: 'Samsung Galaxy S4',
+                    link: 'https://upload.wikimedia.org/wikipedia/commons/8/86/Samsung_Galaxy_S4.svg'
+                },
+                {
+                    id: 2,
+                    name: 'Samsung Galaxy S III',
+                    link: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Samsung_Galaxy_S_III.png'
+                }
+            ]
+        }
     })
     </script>
 </body>
