@@ -12,6 +12,10 @@
             width: 2%;
             height: 2%;
         }
+        .viewIMG {
+            width: 10%;
+            height: 20%;
+        }
     </style>
 
 </head>
@@ -54,6 +58,7 @@
         </nav>
 
         <div>
+            <img class="viewIMG" :src="currentImg">
             <ul>
               <phone-list
                 v-for='list in phones'
@@ -61,7 +66,7 @@
                 v-bind:key='list.id'
               ></phone-list>  
             </ul>
-            
+            <pre>{{$data | json}}</pre>
         </div>
     </div>
 
@@ -74,12 +79,18 @@
     <script>
     Vue.component('phone-list', {
             props: ['item'],
-            template: '<li>{{item.name}} <img class="phonelists" :src="item.link"></li>'
+            template: '<li>{{item.name}} <img class="phonelists" :src="item.link" @click="changeImg"></li>',
+            methods: {
+                changeImg: function() {
+                   vm.changeImg = item.link;
+                }
+            },
         });
     
     new Vue({
         el: '#app',
         data: {
+            currentImg: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Samsung_Galaxy_S_II.png',
             phones: [
                 {
                     id: 0,
