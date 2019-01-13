@@ -12,3 +12,7 @@ This is repository contains personal projects for learning Vue
 
 ## Online Store Imitation
 - Start date: 1/9/13
+- Added Phone navigation
+- Added Phone list
+- Added mouse event
+- Added Phone information
