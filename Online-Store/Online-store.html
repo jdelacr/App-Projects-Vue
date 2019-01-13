@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Amajon: Online Store</title>
+    <title>Sphone: Online Store</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <style>
         .phonelists {
-            width: 2%;
-            height: 2%;
+            width: 40%;
+            height: 50%;
         }
         .viewIMG {
-            width: 10%;
-            height: 20%;
+            width: 30%;
+            height: 90%;
+            clear: left;
+        }
+        .displayIMG {
+            height: 300px;
+        }
+        .phoneItems {
+            height: 100px;
         }
     </style>
 
@@ -23,7 +30,7 @@
 
     <div id="app" class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Amajon</a>
+            <a class="navbar-brand" href="#">Sphone</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -58,14 +65,33 @@
         </nav>
 
         <div>
-            <img class="viewIMG" :src="currentImg">
-            <ul>
-              <phone-list
-                v-for='list in phones'
-                v-bind:item='list'
-                v-bind:key='list.id'
-              ></phone-list>  
-            </ul>
+            <h1>{{title}}</h1>
+            <div class="row">
+                <div class="col">
+                    <div class="displayIMG">
+                        <img class="viewIMG" :src="currentImg"> 
+                    </div>
+                    <div class="row phoneItems">
+                        <div class="col-2" v-for="phone in phones" :key="phone.id">
+                            <img class="phonelists" :src="phone.link" @click="changeIMG(phone)">
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="col">
+                    <ul v-for="phone in phones" v-if="phone.name === title">
+                        <li v-if="phone.Condition === true">New</li>
+                        <li v-else>Used</li>
+                        <li>{{phone.Size}}</li>
+                        <li>{{phone.Resolution}}</li>
+                    </ul>
+                    <button>
+                        
+                    </button>
+                </div>
+            </div>
+            
             <pre>{{$data | json}}</pre>
         </div>
     </div>
@@ -77,38 +103,45 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <script>
-    Vue.component('phone-list', {
-            props: ['item'],
-            template: '<li>{{item.name}} <img class="phonelists" :src="item.link" @click="changeImg"></li>',
-            methods: {
-                changeImg: function() {
-                   vm.changeImg = item.link;
-                }
-            },
-        });
-    
     new Vue({
         el: '#app',
         data: {
+            title: 'Samsung Galaxy S II',
             currentImg: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Samsung_Galaxy_S_II.png',
             phones: [
                 {
                     id: 0,
                     name: 'Samsung Galaxy S II',
-                    link: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Samsung_Galaxy_S_II.png'
+                    link: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Samsung_Galaxy_S_II.png',
+                    Condition: false,
+                    Size: '4.3 in',
+                    Resolution: '800 x 480'
                 },
                 {
                     id: 1,
                     name: 'Samsung Galaxy S4',
-                    link: 'https://upload.wikimedia.org/wikipedia/commons/8/86/Samsung_Galaxy_S4.svg'
+                    link: 'https://upload.wikimedia.org/wikipedia/commons/8/86/Samsung_Galaxy_S4.svg',
+                    Condition: true,
+                    Size: '5 in',
+                    Resolution: '1920 x 1080'
                 },
                 {
                     id: 2,
                     name: 'Samsung Galaxy S III',
-                    link: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Samsung_Galaxy_S_III.png'
+                    link: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Samsung_Galaxy_S_III.png',
+                    Condition: true,
+                    Size: '4.8 in',
                 }
             ]
-        }
+        },
+        methods: {
+            changeIMG: function(phone) {
+                this.currentImg = phone.link;
+                this.title = phone.name;
+                console.log(this.currentIMG);
+                
+            }
+        },
     })
     </script>
 </body>
