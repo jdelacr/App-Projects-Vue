@@ -16,3 +16,4 @@ This is repository contains personal projects for learning Vue
 - Added Phone list
 - Added mouse event
 - Added Phone information
+- Added Function for Out of Stock

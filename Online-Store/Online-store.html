@@ -79,15 +79,21 @@
                     
                 </div>
 
-                <div class="col">
-                    <ul v-for="phone in phones" v-if="phone.name === title">
-                        <li v-if="phone.Condition === true">New</li>
-                        <li v-else>Used</li>
-                        <li>{{phone.Size}}</li>
-                        <li>{{phone.Resolution}}</li>
+                <div class="col"  v-for="phone in phones" v-if="phone.name === title">
+                    <ul>
+                        <li v-if="phone.Condition === true">Condition: New</li>
+                        <li v-else>Condition: Used</li>
+                        <li>Phone Size: {{phone.Size}}</li>
+                        <li>Resolution: {{phone.Resolution}}</li>
+                        <li v-if="phone.Stock > 0">Number of Stock: {{phone.Stock}}</li>
+                        <li v-else>-Out of Stock-</li>
+
                     </ul>
-                    <button>
-                        
+                    <button class="btn btn-primary"
+                        @click="UpdateStockCart(phone)" 
+                        :disabled="isStock"
+                    >
+                        Add to Cart
                     </button>
                 </div>
             </div>
@@ -106,6 +112,7 @@
     new Vue({
         el: '#app',
         data: {
+            isStock: false,
             title: 'Samsung Galaxy S II',
             currentImg: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Samsung_Galaxy_S_II.png',
             phones: [
@@ -115,7 +122,8 @@
                     link: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Samsung_Galaxy_S_II.png',
                     Condition: false,
                     Size: '4.3 in',
-                    Resolution: '800 x 480'
+                    Resolution: '800 x 480',
+                    Stock : 10
                 },
                 {
                     id: 1,
@@ -123,7 +131,8 @@
                     link: 'https://upload.wikimedia.org/wikipedia/commons/8/86/Samsung_Galaxy_S4.svg',
                     Condition: true,
                     Size: '5 in',
-                    Resolution: '1920 x 1080'
+                    Resolution: '1920 x 1080',
+                    Stock : 6
                 },
                 {
                     id: 2,
@@ -131,6 +140,7 @@
                     link: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Samsung_Galaxy_S_III.png',
                     Condition: true,
                     Size: '4.8 in',
+                    Stock : 5
                 }
             ]
         },
@@ -139,7 +149,16 @@
                 this.currentImg = phone.link;
                 this.title = phone.name;
                 console.log(this.currentIMG);
+                if(phone.Stock > 0){
+                    this.isStock = false;
+                }
                 
+            },
+            UpdateStockCart: function(phone) {
+                phone.Stock -= 1;
+                if(phone.Stock === 0){
+                    this.isStock = true;
+                }
             }
         },
     })
