@@ -56,10 +56,9 @@
                             <i class="fas fa-shopping-basket"></i> ({{Addcart}})
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <shopping-cart
-                                v-for="item in items"
-                                v-bind:item="item"
-                            ></shopping-cart>
+                            <ul>
+                                <li v-for="item in phones">{{item.id}} Qty: {{Qty(item)}}</li>
+                            </ul>
                         </div>
                     </li>
                 </ul>
@@ -111,18 +110,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <script>
-        Vue.component('shopping-cart', 
-            {
-                props: ['item'],
-                template:
-                '<p>{{item}}</p>'
-            
-            })
     new Vue({
         el: '#app',
         data: {
             Addcart: 0,
             items: [],
+            basket: [],
             CartItem: [],
             isStock: false,
             title: 'Samsung Galaxy S II',
@@ -173,7 +166,10 @@
                 }
                 this.CartItem.push(phone.id);
                 this.Addcart = this.CartItem.length;
-                this.items.push(this.CartItem.filter(CartItem => CartItem === phone.id).length)
+            },
+            Qty: function(item) {
+                let amount = this.CartItem.filter(CartItem => CartItem == item.id).length;
+                return amount;
             }
         },
     })
