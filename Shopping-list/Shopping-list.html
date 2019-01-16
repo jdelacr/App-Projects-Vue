@@ -60,16 +60,23 @@
             Qty: 0
         },
         methods: {
+            //Append the entered shopping list
             AddItem: function () {
+                //We append the entered input to the list
                 this.items.push(this.Qty + ' ' +  this.grocery)
             },
+
+            //Disable function for the button
             isDisabled: function () {
+                //This disable the button when the there is no entered string in the input
                 if (this.grocery.length == 0){
                     return true
                 }
+                //This disable the button when there is no quantity of more than 0
                 if (this.Qty == 0){
                     return true
                 }
+                //enable the button when both condition are true
                 else
                     return false
             }

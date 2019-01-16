@@ -106,14 +106,21 @@
             github : 'https://github.com/jdelacr'
         },
         methods: {
+            //Display function when number button is clicked
             handle: function(number) {
+                //This replace the 0 when a number button is clicked
                 if(this.display[0] === '0'){
                     return this.display = number;
                 }
+
+                //This determines if it's not 0 we continue to concat the numbers like 7+3
+                //which will become 73 (no calculation)
                 else
                     return this.display += number;
             },
+            //Calculating the display
             eval: function() {
+                //We 
                 return this.display = eval(this.display);
             },
             clear: function() {

@@ -38,6 +38,11 @@
             margin-top: 50px;
             padding-right: 20px;
         }
+        div.sources {
+            margin-top: 10px;
+            float: right;
+            font-size: 12px;
+        }
     </style>
 
 </head>
@@ -113,8 +118,9 @@
                     </button>
                 </div>
             </div>
-            
-            <pre>{{$data | json}}</pre>
+            <div class="row sources">
+                <p> <a v-bind:href="source">Source</a> | <a v-bind:href="github">Github</a> </p>
+            </div>
         </div>
     </div>
 
@@ -129,8 +135,6 @@
         el: '#app',
         data: {
             Addcart: 0,
-            items: [],
-            basket: [],
             CartItem: [],
             isStock: false,
             title: 'Samsung Galaxy S II',
@@ -162,28 +166,49 @@
                     Size: '4.8 in',
                     Stock : 5
                 }
-            ]
+            ],
+            source : 'https://github.com/jdelacr/App-Projects-Vue/tree/master/Online-Store',
+            github : 'https://github.com/jdelacr'
         },
         methods: {
+            //Change the display when clicking the phones at the bottom
             changeIMG: function(phone) {
+                //this set the selected image
                 this.currentImg = phone.link;
+
+                //change the name of the phone
                 this.title = phone.name;
                 console.log(this.currentIMG);
+
+                //this determines if the phone stock is available or not
                 if(phone.Stock > 0){
                     this.isStock = false;
                 }
                 
             },
+
+            //A button function that decrease the amount of stock available
             UpdateStockCart: function(phone) {
+                //decrement the stock
                 phone.Stock -= 1;
+
+                //this disable the button if the stock reaches 0
                 if(phone.Stock === 0){
                     this.isStock = true;
                 }
+
+                //this is needed to count the quantity of in the basket
+                //we push the phones id to count how many there are
                 this.CartItem.push(phone.id);
+
+                // this is for displaying how many are in the basket
                 this.Addcart = this.CartItem.length;
 
             },
+
+            //A function to display how many each are placed in the basket
             Qty: function(item) {
+                //We filter each based on the id that matches and then we count them
                 let amount = this.CartItem.filter(CartItem => CartItem == item.id).length;
                 return amount;
             }
