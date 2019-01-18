@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Learn Vue!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <style>
+        .grid-container{
+            display: grid;
+            grid-template-columns: auto auto auto;
+
+        }
+        img {
+            height: 100%;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto"><h1>{{Title}}</h1></div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Books">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="button">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row grid-container mx-5">
+                <vue-book
+                    v-for="book in Books"
+                    :item='book'
+                    :key="book.id"
+                ></vue-book>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script>
+Vue.component('vue-book', {
+    props: ['item'],
+    template: '<div class="col">\
+        <div><img :src="item.Image"></div>\
+            <div><h2>{{item.Title}}</h2></div>\
+            <div>Author: {{item.Author}}</div>\
+        </div>'
+});
+new Vue({
+    el: '#app',
+    data: {
+        Title: 'Learn to Vue',
+        Books: [
+            {
+                Title: 'The Vue HandBook',
+                Author: 'Flavio Copes',
+                Image: 'https://cv02.twirpx.net/2575/2575292.jpg?t=20180714041426',
+            },
+            {
+                Title: 'Fullstack Vue',
+                Author: 'Hassan Djirdeh',
+                Image: 'https://images-na.ssl-images-amazon.com/images/I/51z3fT5zLvL._SX390_BO1,204,203,200_.jpg',
+            },
+            {
+                Title: 'Learning Vue.js 2',
+                Author: 'Olga Filipova',
+                Image: 'https://covers.oreillystatic.com/images/9781786469946/lrg.jpg',
+            },
+            {
+                Title: 'The Majesty ',
+                Author: 'Flavio Copes',
+                Image: 'https://cv02.twirpx.net/2575/2575292.jpg?t=20180714041426',
+            },
+            {
+                Title: 'The Vue HandBook',
+                Author: 'Flavio Copes',
+                Image: 'https://cv02.twirpx.net/2575/2575292.jpg?t=20180714041426',
+            }
+        ]
+    }
+})
+</script>

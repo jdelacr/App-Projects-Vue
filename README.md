@@ -10,7 +10,7 @@ This is repository contains personal projects for learning Vue
 - Able to calculate
 - Added clear button and sources
 
-## Online Store Imitation
+## Online Store Imitation - Finished
 - Start date: 1/9/13
 - Added Phone navigation
 - Added Phone list
@@ -19,3 +19,7 @@ This is repository contains personal projects for learning Vue
 - Added Function for Out of Stock
 - Added add the basket function
 - Added for displaying the basket list
+
+## Learning Vue
+- Start date: 1/18/19
+- Added a layout for the page
