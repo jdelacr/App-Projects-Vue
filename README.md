@@ -23,3 +23,4 @@ This is repository contains personal projects for learning Vue
 ## Learning Vue
 - Start date: 1/18/19
 - Added a layout for the page
+- Started adding my preferred books
