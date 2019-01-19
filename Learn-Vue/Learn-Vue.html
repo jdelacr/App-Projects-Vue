@@ -26,20 +26,21 @@
         <div class="row justify-content-md-center">
             <div class="col-md-auto">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search Vue Materials">
+                    <input type="text" class="form-control" placeholder="Search Vue Materials" v-model="searchString">
                     <div class="input-group-append">
-                        <button class="btn btn-success" type="button">Search</button>
+                        <button class="btn btn-success" type="button" v-on:click="searchString">Search</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row grid-container mx-5">
                 <vue-book
-                    v-for="book in Books"
+                    v-for="book in ItemLists"
                     :item='book'
                     :key="book.id"
                 ></vue-book>
         </div>
+        {{$data| json}}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -51,13 +52,14 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 <script>
 Vue.component('vue-book', {
-    props: ['item'],
+    props: ['item', 'searchString'],
     template: '<div class="col">\
         <div><img :src="item.Image"></div>\
             <div><h2>{{item.Title}}</h2></div>\
             <div>Author: {{item.Author}}</div>\
-        </div>'
+        </div>',
 });
+
 new Vue({
     el: '#app',
     data: {
@@ -93,7 +95,19 @@ new Vue({
                 Author: 'Brett Nelson',
                 Image: 'http://www.allitebooks.in/wp-content/uploads/2018/09/Getting-to-Know-Vuejs-350x462.jpg',
             }
-        ]
-    }
-})
+        ],
+        searchString: ''
+    },
+    computed: {
+        ItemLists: function() {
+            let self = this;
+            if(this.searchString == ''){
+                return this.Books
+            }
+            return this.Books.filter(function (item) {
+                return item.Title.toLowerCase().indexOf(self.searchString.toLowerCase()) >= 0
+            });
+        }
+    },
+});
 </script>
