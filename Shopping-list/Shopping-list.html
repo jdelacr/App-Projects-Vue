@@ -16,6 +16,21 @@
              padding: 5%;
              box-shadow: 5px 5px 10px grey;
         }
+        .group-enter-active, .group-leave-active, .group-move {
+            transition: all .5s ease-in;
+        }
+        .group-enter, .group-leave-to {
+            opacity: 0;
+        }
+        .itemBasket {
+            font-size: 24px;
+        }
+        span {
+            float: right;
+        }
+        ul {
+            list-style: none;
+        }
     </style>
 </head>
 <body>
@@ -35,54 +50,56 @@
         <div class="form-group row">
             <button class="btn btn-primary" type="submit" 
                 v-on:click="AddItem"
-                v-bind:disabled="isDisabled()">Submit</button> 
+                v-bind:disabled="isDisabled()"
+                >Submit</button> 
             <button class="btn btn-danger">Clear</button> 
         </div>
-        <ul>
-            <item-list
-                v-for="item in items"
-                v-bind:item="item"
-            ></item-list>
-        </ul>
+        <transition-group name="group" tag="ul" class="itemBasket">
+            <li v-for="(item, index) in items" 
+            :key="index">{{item}} <span v-on:click="deleteItem(index)"> X </span></li>
+        </transition-group>
+            
+            
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <script>
-    Vue.component('item-list', {
-        props: ['item'],
-        template: "<li> {{item}} </li>"
-    });
-
-    new Vue({
-        el: '#app',
-        data: {
-            items: [],
-            grocery: '',
-            Qty: 0
-        },
-        methods: {
-            //Append the entered shopping list
-            AddItem: function () {
-                //We append the entered input to the list
-                this.items.push(this.Qty + ' ' +  this.grocery)
+        new Vue({
+            el: '#app',
+            data: {
+                items: [],
+                grocery: '',
+                Qty: 0,
+                show: true
             },
+            methods: {
+                //Append the entered shopping list
+                AddItem: function () {
+                    //We append the entered input to the list
+                    this.items.push(this.Qty + ' ' +  this.grocery)
+                },
 
-            //Disable function for the button
-            isDisabled: function () {
-                //This disable the button when the there is no entered string in the input
-                if (this.grocery.length == 0){
-                    return true
+                //Disable function for the button
+                isDisabled: function () {
+                    //This disable the button when the there is no entered string in the input
+                    if (this.grocery.length == 0){
+                        return true
+                    }
+                    //This disable the button when there is no quantity of more than 0
+                    if (this.Qty == 0){
+                        return true
+                    }
+                    //enable the button when both condition are true
+                    else
+                        return false
+                },
+                //Added A delete list
+                deleteItem: function(index) {
+                    this.items.splice(index,1);
+                    show = false
                 }
-                //This disable the button when there is no quantity of more than 0
-                if (this.Qty == 0){
-                    return true
-                }
-                //enable the button when both condition are true
-                else
-                    return false
-            }
 
-        },
-    });
+            },
+        });
     </script>
 </body>
 </html>
