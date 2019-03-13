@@ -28,6 +28,23 @@
             left: 0;
             z-index: -1;
             transition: .5s;
+            overflow: hidden;
+            padding-top: 200px;
+        }
+        nav> ul {
+            color: gray;
+            list-style: none;
+            font-size: 24px;
+            width: 100%;
+            padding-left: 0;
+        }
+        nav > ul > li {
+            padding: 5px 0px 10px 30px;
+        }
+        nav > ul > li:hover {
+            background-color: #4dba87;
+            color: white;
+            transition: all .5s ease-in-out;
         }
         .nav {
             width: 250px;
@@ -41,13 +58,19 @@
         }
         #svgNavButton:active{
             transform: translateY(20px);
-            transition: .5s;
+            transition: .15s ease-in;
         }
     </style>
 </head>
 <body>
     <div id="nav">
-            <nav id="VueNavigation"></nav>
+            <nav id="VueNavigation">
+                <ul>
+                    <li>Home</li>
+                    <li>Projects</li>
+                    <li>About</li>
+                </ul>
+            </nav>
         <svg id="svgNavButton"
         v-on:click="ZoomVue"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
