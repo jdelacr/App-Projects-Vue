@@ -72,6 +72,25 @@
         div#app{
             padding-top: 10%;
         }
+        .MainBody {
+            position: fixed;
+            right: 0;
+            height: 100%;
+            left: 250px;
+            padding-left: 25px;
+        }
+
+        .fade-enter-active {
+            transition: all .5s cubic-bezier(0, 0, 0, 0);
+            transition-delay: 1s;
+        }
+        .fade-leave-active {
+            transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            transform: translateX(10px);
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
@@ -116,15 +135,19 @@
 
 
 
+        <transition name="fade">
+        <page-view1 v-if="Home" header="Home">
+        </page-view1>
 
-        <page-view v-if="Home" header="Home">
-        </page-view>
+        <page-view2 v-if="Project" header="Project">
+        </page-view2>
 
-        <page-view v-if="Project" header="Project">
-        </page-view>
+        <page-view3 v-if="About" header="About">
+        </page-view3>
+        </transition>
+        
 
-        <page-view v-if="About" header="About">
-        </page-view>
+        
 
 
     </div>
@@ -144,12 +167,32 @@
 
     <script>
 
-    Vue.component('page-view', {
+    Vue.component('page-view1', {
         props: ['header'],
         template: `
-            <div>
+            <div class="MainBody">
                 <h1>{{header}}</h1>
                     <p>Welcome to my Vue projects!</p>
+            </div>
+        `,
+    });
+
+    Vue.component('page-view2', {
+        props: ['header'],
+        template: `
+            <div class="MainBody">
+                <h1>{{header}}</h1>
+                    <p>My Current Projects!</p>
+            </div>
+        `,
+    });
+
+    Vue.component('page-view3', {
+        props: ['header'],
+        template: `
+            <div class="MainBody">
+                <h1>{{header}}</h1>
+                    <p>About me!</p>
             </div>
         `,
     });
