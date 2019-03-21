@@ -91,6 +91,7 @@
             transform: translateX(10px);
             opacity: 0;
         }
+
     </style>
 </head>
 <body>
@@ -180,11 +181,60 @@
 
     Vue.component('page-view2', {
         props: ['header'],
+        data: function(){
+            return {
+                Calculator: "App-calculator/calculator.html",
+                Shopping: "Shopping-list/Shopping-list.html",
+                Online: "Online-Store/Online-store.html",
+                Learn: "Learn-Vue/Learn-Vue.html"
+            }
+        },
         template: `
             <div class="MainBody">
                 <h1>{{header}}</h1>
                 <p>My Current Projects!</p>
-                
+                <div class="card-columns">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Shopping List</h5>
+                            <p class="card-text">An online shopping application that lets you enter your shopping list with quantity</p>
+                            <a :href="Shopping" class="btn btn-success">Enter</a>    
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Completion: On progress</small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Calculator</h5>
+                            <p class="card-text">A calculator that lets the user calculate simple basic math functions</p>  
+                            <a :href="Calculator" class="btn btn-success">Enter</a> 
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Completion: Finished</small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Online Store</h5>
+                            <p class="card-text">An imitation of an online store that determines the availability of the stock item and cart list</p>
+                            <a :href="Online" class="btn btn-success">Enter</a> 
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Completion: Finished</small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Search Learned Vue Books</h5>
+                            <p class="card-text">Features a search function that displays the books used to learn Vue when a user typed a string in the search bar</p>
+                            <a :href="Learn" class="btn btn-success">Enter</a> 
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Completion: On Progress</small>
+                        </div>
+                    </div>
+                </div>
             </div>
         `,
     });
