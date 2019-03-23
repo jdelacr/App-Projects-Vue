@@ -1,5 +1,6 @@
 # App-Projects-Vue
 This is repository contains personal projects for learning Vue
+link: https://jdelacr.github.io/App-Projects-Vue/
 
 ## Shopping-List
 - Fixed the disable function
@@ -27,3 +28,9 @@ This is repository contains personal projects for learning Vue
 - Started adding my preferred books
 - Removed Search Button
 - Implemented search function
+
+## Landing Page
+- Added Landing Page
+- Create a navigation without additional html files
+- Finished Adding project links
+- Create the webpage to see the html in action
