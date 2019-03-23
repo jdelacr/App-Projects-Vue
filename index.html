@@ -117,15 +117,17 @@
 </head>
 <body>
     <div id="app" class="container">
+        <!--Navigation-->
         <div id="nav">
                 <nav id="VueNavigation">
                     <ul>
+                        <!--Display the page when clicked using the function IsSelected-->
                         <li v-on:click="IsSelected('Home')">Home</li>
                         <li v-on:click="IsSelected('Project')">Projects</li>
-                        
                         <li v-on:click="IsSelected('About')">About</li>
                     </ul>
                 </nav>
+            <!--SVG image of vue-->
             <svg id="svgNavButton"
            xmlns:dc="http://purl.org/dc/elements/1.1/"
            xmlns:cc="http://creativecommons.org/ns#"
@@ -157,19 +159,23 @@
         </div>
 
 
-
+        <!--Transition for each "Pages"-->
         <transition name="fade">
+        <!--Display the Home page-->
         <page-view1 v-if="Home" header="Home">
         </page-view1>
 
+        <!--Display the Project page-->
         <page-view2 v-if="Project" header="Project">
         </page-view2>
 
+        <!--Display the About page-->
         <page-view3 v-if="About" header="About">
         </page-view3>
         </transition>
 
         <footer>
+            <!--This is the footer for source and github link-->
             <div>
                 <p><a v-bind:href="source">Source</a> | <a v-bind:href="github">Github</a></p>
             </div>
@@ -177,20 +183,21 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <script>
+        //This function toggles when the vue SVG is clicked to close and open by manipulating the CSS style
         function showNav(){
             var Navwidth = document.getElementById("VueNavigation");
             Navwidth.classList.toggle("nav");
         }
-
+        //Start the function of showNav when the image is clicked
         function start() {
             document.getElementById("svgNavButton").addEventListener("click", showNav,false);
         }
-
+        //Load the function when the page is loaded
         window.addEventListener("load", start, false);
     </script>
 
     <script>
-
+    //This is the component for home page
     Vue.component('page-view1', {
         props: ['header'],
         template: `
@@ -202,6 +209,7 @@
         `,
     });
 
+    //This is the component for the project page
     Vue.component('page-view2', {
         props: ['header'],
         data: function(){
@@ -262,6 +270,7 @@
         `,
     });
 
+    //This is the component for the About page
     Vue.component('page-view3', {
         props: ['header'],
         template: `
@@ -282,6 +291,7 @@
             github : 'https://github.com/jdelacr'
         },
         methods: {
+            //Set the boolean of clicked navigation to true and set the others to false
             IsSelected: function(name){
                 if (name == 'Home'){
                     this.Home = true;
