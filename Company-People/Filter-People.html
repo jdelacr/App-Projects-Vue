@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Company</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: lightgreen;
+        }
+        #app {
+            background: white;
+            height: 100%;
+            box-shadow: 5px 5px 5px grey;
+            padding-bottom: 20px;
+            padding-top: 10px;
+            }
+        img {
+            height: 100%;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="container h-100">
+        <search-box class="alert alert-success" 
+        v-bind:value="checked"
+        v-on:input="checked = $event"></search-box>
+        <people-list></people-list>
+    </div>
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script>
+Vue.component('search-box', {
+    data() {
+        return {
+            searchText: '',
+        }
+    },
+    props: ['value'],
+    template: 
+    `
+        <div class="alert alert-success" role=""alert>
+            Search <input v-model="searchText"> <input type="checkbox" v-bind:value="value" v-on:input="$emit('input', $event.target.value)"> <label>Intern</label>
+        </div>
+    `
+});
+Vue.component('people-list', {
+    data() {
+        return {
+            CompanyPeople: [
+                {
+                    name: "John Doe",
+                    description: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dolor massa, rutrum vitae rhoncus volutpat, maximus sed sem. Nullam dapibus euismod fermentum. Vestibulum sed pharetra nisl. Maecenas sit amet ipsum non sem imperdiet aliquet ut nec neque. Curabitur laoreet risus sed luctus convallis. Cras nisi mauris, dapibus ac pulvinar nec, blandit sit amet dui. Phasellus ut ante a lorem mollis tincidunt. Vestibulum et consequat ipsum. Curabitur ornare purus sed posuere volutpat. Fusce nec ipsum fringilla, venenatis ante at, ornare tortor. Curabitur tempor dui magna, id sagittis nisl cursus sit amet. ",
+                    checkedIntern: false,
+                    profilepic: "https://images.pexels.com/photos/634021/pexels-photo-634021.jpeg?cs=srgb&dl=actor-adult-black-and-white-634021.jpg&fm=jpg"
+                },
+                {
+                    name: "Jane Doe",
+                    description: "Praesent ut velit aliquam nunc bibendum accumsan egestas rutrum mi. Fusce porta tincidunt faucibus. Nullam id purus vel dui volutpat porta in at purus. Vestibulum imperdiet non arcu non consequat. In at ipsum nulla. Fusce leo dui, feugiat ut massa in, lobortis sagittis arcu. Etiam mauris neque, pellentesque sed tellus eu, pellentesque sodales velit.",
+                    checkedIntern: true,
+                    profilepic: "https://images.pexels.com/photos/1547971/pexels-photo-1547971.jpeg?cs=srgb&dl=adult-beautiful-blush-1547971.jpg&fm=jpg"
+                }
+            ]
+        }
+    },
+    template: 
+    `
+        <div>
+            <div v-for="people in CompanyPeople" class="CompanyProfile container shadow p-3 mb-5 bg-white rounded">
+                <div class="row">
+                    <div class="col">
+                        <p>Name: {{people.name}}</p>
+                        <p>Description: {{people.description}}</p>
+                    </div>
+                    <div col-md-auto>
+                        <img v-bind:src="people.profilepic">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    `
+});
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            checkedIntern: true
+        }
+    })
+</script>
+</html>
